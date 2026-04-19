@@ -37,8 +37,15 @@ def calculate_fare(km, vehicle_type, hour):
 
 try:
     km = float(input("Enter distance (in km): "))
+    if km<0:
+        print("Distance can't be negative")
+        exit()
     vehicle_type = input("Enter vehicle type: ")
     hour = int(input("Enter hour (0-23): "))
+    if hour<0 or hour>23:
+        print("Hour must be between 0 and 23")
+        exit()
+        
 
     base, surge, night, discount, final = calculate_fare(km, vehicle_type, hour)
 
