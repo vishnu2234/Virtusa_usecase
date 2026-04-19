@@ -43,6 +43,7 @@ public class Password_validator {
 		
 		if(valid_password(Password)) {
 			System.out.println("Password is Valid");
+			break;
 		}
 		else {
 			System.out.println("Please try again");
