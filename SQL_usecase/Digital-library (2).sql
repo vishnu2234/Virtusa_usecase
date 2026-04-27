@@ -54,20 +54,20 @@ JOIN Books b ON i.book_id = b.book_id
 GROUP BY b.category
 ORDER BY total_borrows DESC;
 
-// it shows inactive student
-SELECT * FROM Students
+
+ALTER TABLE Students ADD status VARCHAR(20) DEFAULT 'Active';
+select * from Students;
+UPDATE Students
+SET status = 'Inactive'
 WHERE student_id NOT IN (
     SELECT student_id
     FROM IssuedBooks
     WHERE issue_date >= CURDATE() - INTERVAL 3 YEAR
 );
 
-DELETE FROM IssuedBooks
-WHERE issue_date < CURDATE() - INTERVAL 3 YEAR;
-
 DELETE FROM Students
 WHERE student_id NOT IN (
-    SELECT DISTINCT student_id FROM IssuedBooks
+    SELECT student_id
+    FROM IssuedBooks
+    WHERE issue_date >= CURDATE() - INTERVAL 3 YEAR
 );
-
-
